@@ -12,15 +12,6 @@ namespace USQLApacheLogTools
     [SqlUserDefinedExtractor]
     public class LogExtractor : IExtractor
     {
-        /*
-        private string _logType;
-
-        public LogExtractor(string logType)
-        {
-            this._logType = logType;
-
-        }
-        */
         public override IEnumerable<IRow> Extract(IUnstructuredReader input, IUpdatableRow output)
         {
             // This method extracts the apache log in either the NCSA Common Log Format or the Combined log format.
