@@ -1,0 +1,23 @@
+USE DATABASE webdata;
+
+REFERENCE ASSEMBLY [USQLApacheLogTools];
+
+@testData = EXTRACT remoteHost string,
+                    userId string,
+                    uesrName string,
+                    accessDate string,
+                    method string,
+                    path string,
+                    protocol string,
+                    statusCode string,
+                    bytesSent string,
+                    referrer string,
+                    browser string
+            FROM "/Data/apachelogs/{*}"
+            USING new USQLApacheLogTools.LogExtractor();
+
+@tmp = SELECT remoteHost, statusCode, referrer, browser, method FROM @testData;
+
+OUTPUT @tmp  
+TO "/output/testapache.csv"
+USING Outputters.Csv();
